@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const favSlice = createSlice({
-  name: 'faveSlice',
+  name: 'favourites',
   initialState,
   reducers: {
     addFavourite: (state, action) => {
