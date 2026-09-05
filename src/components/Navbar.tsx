@@ -5,9 +5,15 @@ import { useDebouncedSearch } from '../hooks/useDebouncedSearch';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSearch } from '../features/filters/filterSlice';
+import { Spinner } from './ui/spinner';
+import { useIsFetching } from '@tanstack/react-query';
 
 export default function Navbar() {
   const [searchInput, setSearchInput] = useState('');
+  const isFetching =
+    useIsFetching({
+      queryKey: ['movie'],
+    }) > 0;
   const debouncedSearch = useDebouncedSearch(searchInput);
   const dispatch = useDispatch();
 
@@ -28,13 +34,14 @@ export default function Navbar() {
           </h1>
         </Link>
       </section>
-      <section>
+      <section className='flex items-center gap-4'>
         <input
           placeholder='Enter your search'
           className='w-full'
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
+        {isFetching && <Spinner className='h-6 w-6' />}
       </section>
       <section>
         <User />

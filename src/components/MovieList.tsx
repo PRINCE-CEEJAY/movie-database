@@ -1,13 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import MovieCard from './MovieCard';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { type Movie } from '../types/movie';
 import { useEffect } from 'react';
 import { setSearch } from '../features/filters/filterSlice';
-
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const ACCESS_TOKEN = import.meta.env.VITE_API_ACCESS_TOKEN;
+import { fetchMovies } from '../lib/utils';
 
 export default function MovieList() {
   const { search: movieName } = useSelector((state) => state.filters);
@@ -18,22 +14,9 @@ export default function MovieList() {
     isError,
   } = useQuery({
     queryKey: ['movie', movieName],
-    queryFn: fetchMovies,
+    queryFn: () => fetchMovies(movieName),
   });
   const dispatch = useDispatch();
-
-  async function fetchMovies() {
-    const MOVIE_URL = `${BASE_URL}/search/movie?query=${movieName}`;
-    try {
-      const res = await axios.get(MOVIE_URL, {
-        headers: { Authorization: `Bearer ${ACCESS_TOKEN}` },
-      });
-      const data: Movie[] = res.data.results;
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   // initial data load
   useEffect(() => {
@@ -41,19 +24,22 @@ export default function MovieList() {
   }, []);
 
   console.log(`Movie searched for: ${movieName}`);
-  if (isLoading)
+
+  if (isLoading) {
     return (
       <h1 className='text-xl font-bold text-center animate-pulse'>
         Loading ...
       </h1>
     );
+  }
 
-  if (isError)
+  if (isError) {
     return (
       <h1 className='text-xl font-bold tex-red-500 text-center'>
         {error.message}
       </h1>
     );
+  }
 
   return (
     <div className='grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6'>
