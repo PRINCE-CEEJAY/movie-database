@@ -107,7 +107,6 @@ export default function FilteredMovie({ movie }: MovieDetailsProps) {
         <Button
           onClick={() => navigate('/')}
           variant={'ghost'}
-          size={'lg'}
           className={'cursor-pointer'}
         >
           Go Back
