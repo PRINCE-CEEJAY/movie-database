@@ -5,3 +5,6 @@ import filterReducer from './features/filters/filterSlice';
 export const store = configureStore({
   reducer: { favorites: faveReducer, filters: filterReducer },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

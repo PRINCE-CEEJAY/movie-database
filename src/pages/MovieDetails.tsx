@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { fetchMovies } from '../lib/utils';
-import { useSelector } from 'react-redux';
 import FilteredMovie from '../components/FilteredMovie';
+import { useAppSelector } from '../hooks/ReduxCustomHooks';
 
 export default function MovieDetails() {
-  const { search: movieName } = useSelector((state) => state.filters);
+  const { search: movieName } = useAppSelector((state) => state.filters);
   const { movieId } = useParams();
 
   const { data: movies } = useQuery({

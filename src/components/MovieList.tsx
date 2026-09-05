@@ -1,12 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import MovieCard from './MovieCard';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { setSearch } from '../features/filters/filterSlice';
 import { fetchMovies } from '../lib/utils';
+import { useAppSelector } from '../hooks/ReduxCustomHooks';
 
 export default function MovieList() {
-  const { search: movieName } = useSelector((state) => state.filters);
+  const { search: movieName } = useAppSelector((state) => state.filters);
   const {
     data: movies,
     error,

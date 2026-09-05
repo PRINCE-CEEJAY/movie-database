@@ -1,12 +1,11 @@
 import { User, Film } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { buttonVariants } from './ui/button';
 import { useDebouncedSearch } from '../hooks/useDebouncedSearch';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { setSearch } from '../features/filters/filterSlice';
 import { Spinner } from './ui/spinner';
 import { useIsFetching } from '@tanstack/react-query';
+import { useAppDispatch } from '../hooks/ReduxCustomHooks';
 
 export default function Navbar() {
   const [searchInput, setSearchInput] = useState('');
@@ -15,7 +14,7 @@ export default function Navbar() {
       queryKey: ['movie'],
     }) > 0;
   const debouncedSearch = useDebouncedSearch(searchInput);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!debouncedSearch) return;
