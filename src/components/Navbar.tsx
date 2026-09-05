@@ -1,8 +1,20 @@
 import { User, Film } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { buttonVariants } from './ui/button';
+import { useDebouncedSearch } from '../hooks/useDebouncedSearch';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSearch } from '../features/filters/filterSlice';
 
 export default function Navbar() {
+  const [searchInput, setSearchInput] = useState('');
+  const debouncedSearch = useDebouncedSearch(searchInput);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setSearch(debouncedSearch));
+  }, [debouncedSearch]);
+
   return (
     <div className='flex items-center justify-between p-2 bg-white/30 backdrop-blur-md shadow-md '>
       <section className='flex items-center gap-4'>
@@ -17,7 +29,12 @@ export default function Navbar() {
         </Link>
       </section>
       <section>
-        <input placeholder='Enter your search' className='w-full'/>
+        <input
+          placeholder='Enter your search'
+          className='w-full'
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
       </section>
       <section>
         <User />

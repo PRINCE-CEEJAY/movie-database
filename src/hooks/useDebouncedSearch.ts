@@ -5,7 +5,7 @@ export function useDebouncedSearch(text: string, delay: number = 500) {
 
   useEffect(() => {
     const delayFn = setTimeout(() => {
-      setDebouncedValue(debouncedValue);
+      setDebouncedValue(text);
     }, delay);
 
     return () => clearTimeout(delayFn);
