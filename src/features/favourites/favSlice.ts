@@ -4,10 +4,10 @@ const initialState = {
   faveFeatures: [
     {
       id: crypto.randomUUID(),
-      movieTitle: '',
-      movieImage: '',
+      movieTitle: 'Merlin',
+      imageUrl: '/merlin.jpeg',
       votes: 0,
-      likes: 0,
+      watched: false,
     },
   ],
 };
@@ -17,7 +17,9 @@ const favSlice = createSlice({
   initialState,
   reducers: {
     addFavourite: (state, action) => {
+      if (!action.payload) return;
       state.faveFeatures.push({
+        id: crypto.randomUUID(),
         ...action.payload,
       });
     },
@@ -27,7 +29,7 @@ const favSlice = createSlice({
         (movie) => movie.id === action.payload,
       );
       if (existingIndex !== -1) {
-        state.faveFeatures.slice(existingIndex, -1);
+        state.faveFeatures.splice(existingIndex, -1);
       }
     },
   },
