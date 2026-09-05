@@ -23,11 +23,11 @@ export default function Navbar() {
   }, [debouncedSearch]);
 
   return (
-    <div className='flex items-center justify-between p-2 bg-white/30 backdrop-blur-md shadow-md '>
+    <div className='flex items-center justify-between p-2 bg-black/70 backdrop-blur-md shadow-md '>
       <section className='flex items-center gap-4'>
         <Link
           to='/'
-          className={`${buttonVariants({ variant: 'secondary' })} cursor-pointer`}
+          className={`flex items-center gap-2 cursor-pointer`}
         >
           <Film />
           <h1 className='text-3xl font-extrabold text-transparent bg-clip-text bg-linear-to-br from-blue-600 via-orange-700 to-purple-800 uppercase hidden md:flex'>

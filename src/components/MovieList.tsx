@@ -42,7 +42,7 @@ export default function MovieList() {
   }
 
   return (
-    <div className='grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6'>
+    <div className='grid grid-cols-2 gap-6 md:grid-cols-4 lg:grid-cols-6 p-2'>
       {movies &&
         movies.map((movie) => (
           <MovieCard
