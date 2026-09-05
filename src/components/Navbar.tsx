@@ -18,6 +18,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!debouncedSearch) return;
     dispatch(setSearch(debouncedSearch));
   }, [debouncedSearch]);
 
