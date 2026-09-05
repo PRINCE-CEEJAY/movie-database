@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDebouncedSearch } from '../hooks/useDebouncedSearch';
 import { useEffect, useState } from 'react';
 import { setSearch } from '../features/filters/filterSlice';
-import { Spinner } from './ui/spinner';
+import { Spinner } from '@/components/ui/spinner';
 import { useIsFetching } from '@tanstack/react-query';
 import { useAppDispatch } from '../hooks/ReduxCustomHooks';
 

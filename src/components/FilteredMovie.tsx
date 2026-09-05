@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import type { Movie } from '../types/movie';
-import { Button } from './ui/button';
+import { Button } from '@/components/ui/button';
 
 interface MovieDetailsProps {
   movie: Movie;
